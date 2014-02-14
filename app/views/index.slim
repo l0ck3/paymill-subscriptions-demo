@@ -1,0 +1,56 @@
+- if subscribed?
+  section#articles
+    .container
+      ul
+        - @articles.each do |article|
+          li.article
+            h2 = article.title
+            p
+              = article.content
+
+- else
+  section#pricing
+    .container
+      .box
+        .center
+          h2 You need to subscribe to access the articles
+          p.lead
+            | Pick a plan now and start your journey into awesomeness
+        .big-gap
+        #pricing-table.row
+
+          .col-sm-4
+            ul.plan
+              li.plan-name
+                | 1 month
+              li.plan-price
+                | 99€
+              li
+                | Billed every month
+              li.plan-action
+                a.btn.btn-primary.btn-lg href="#"
+                  | Subscribe
+
+          .col-sm-4
+            ul.plan.featured
+              li.plan-name
+                | 3 months
+              li.plan-price
+                | 275€
+              li
+                | Billed every 3 months
+              li.plan-action
+                a.btn.btn-primary.btn-lg href="#"
+                  | Subscribe
+
+          .col-sm-4
+            ul.plan
+              li.plan-name
+                | 12 months
+              li.plan-price
+                | 900€
+              li
+                | Billed every month
+              li.plan-action
+                a.btn.btn-primary.btn-lg href="#"
+                  | Subscribe

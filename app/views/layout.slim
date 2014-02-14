@@ -1,0 +1,48 @@
+doctype html
+html lang="en"
+  head
+    meta charset="utf-8"
+    meta content="IE=edge" http-equiv="X-UA-Compatible"
+    title Paymill Subscriptions Demo
+
+    == css :application
+
+    /![if lt IE 9]
+      | <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      | <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+
+  body
+    .navbar.navbar-default
+      .container
+        .navbar-header
+          a.navbar-brand href="/"
+            | WriteMill
+        .navbar-collapse.collapse
+          ul.nav.navbar-nav.navbar-right
+            - if current_user
+              li
+                a
+                  ' Hello,
+                  = current_user
+              li
+                a href="/logout"
+                  | logout
+            - else
+              li
+                a href="/login"
+                  | login
+    .container
+      .page-header
+        h1 Check out our worth paying articles
+        p.lead
+          | We write articles that could make your life better. Just read them all you will never regret.
+
+
+    == yield
+
+    #footer.container
+      p
+        | © Paymill 2014
+
+    script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"
+    == js :application
