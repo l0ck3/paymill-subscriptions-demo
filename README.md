@@ -13,3 +13,7 @@ You need to have Ruby 1.9+, Rubygems and Bundler installed on your system
 - Run the `rackup` command to start the server
 - Navigate to the url `http://localhost:9292`
 
+##Enabling subscriptions via Paymill
+
+- add Paymill gem to Gemfile and bundle
+- add private API key to secret.rb
