@@ -1,0 +1,58 @@
+.container
+
+  .payment-errors
+
+  form#payment-form action="#" method="post"
+    input#card-amount-int   type="hidden" value="#{@amount}"
+    br
+    input#card-currency     type="hidden" value="EUR"
+    br
+    input#card-holdername   type="text"   placeholder="Card holder name"
+    br
+    input#card-number       type="text"   placeholder="Card number"
+    br
+    input#card-expiry-month type="text"   placeholder="Expiry month"
+    br
+    input#card-expiry-year  type="text"   placeholder="Expiry year"
+    br
+    input#card-cvc          type="text"   placeholder="CVC"
+    hr
+    input#submit-button     type="submit" value="Pay Now"
+
+
+javascript:
+  PAYMILL_PUBLIC_KEY="#{settings.paymill_public_key}";
+
+  function PaymillResponseHandler(error, result) {
+    if (error) {
+      $(".payment-errors").text(error.apierror);
+    } else {
+      $(".payment-errors").text("");
+      var form = $("#payment-form");
+      var token = result.token;
+
+      form.append("<input type='hidden' name='paymillToken' value='" + token + "'/>");
+      form.get(0).submit();
+    }
+    $("#submit-button").removeAttr("disabled");
+  }
+
+  $(document).ready(function () {
+    $("#payment-form").submit(function (event) {
+      event.preventDefault();
+      $('#submit-button').attr("disabled", "disabled");
+
+      params = {
+        amount_int:     $('#card-amount-int').val(),
+        currency:       $('#card-currency').val(),
+        cardholder:     $('#card-holdername').val(),
+        number:         $('#card-number').val(),
+        exp_month:      $('#card-expiry-month').val(),
+        exp_year:       $('#card-expiry-year').val(),
+        cvc:            $('#card-cvc').val()
+      }
+
+      paymill.createToken(params, PaymillResponseHandler);
+      return false;
+    });
+  });

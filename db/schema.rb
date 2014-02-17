@@ -4,7 +4,7 @@ DB.create_table :users do
   primary_key :id
   varchar :login
   varchar :password
-  boolean :subscribed, default: false
+  varchar :subscription, default: nil
 end
 
 DB.create_table :articles do
